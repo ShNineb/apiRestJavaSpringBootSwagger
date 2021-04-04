@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Nineb\M2-TAL\Java\Java-S2\junitJava\SQLite.demo-master\.metadata\.plugins\org.eclipse.jdt.core
+4126797049.index

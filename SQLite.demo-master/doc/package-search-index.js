@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.pxp.SQLite.demo"},{"l":"com.pxp.SQLite.demo.controller"},{"l":"com.pxp.SQLite.demo.dialect"},{"l":"com.pxp.SQLite.demo.entity"},{"l":"com.pxp.SQLite.demo.repository"},{"l":"com.pxp.SQLite.demo.service"},{"l":"com.pxp.SQLite.demo.SwaggerConfig"}]

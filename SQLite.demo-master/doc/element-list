@@ -1,0 +1,7 @@
+com.pxp.SQLite.demo
+com.pxp.SQLite.demo.controller
+com.pxp.SQLite.demo.dialect
+com.pxp.SQLite.demo.entity
+com.pxp.SQLite.demo.repository
+com.pxp.SQLite.demo.service
+com.pxp.SQLite.demo.SwaggerConfig
