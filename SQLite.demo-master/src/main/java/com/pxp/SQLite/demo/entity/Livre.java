@@ -3,9 +3,14 @@
  */
 package com.pxp.SQLite.demo.entity;
 
+import javax.persistence.ElementCollection;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author U023426
@@ -21,24 +26,49 @@ public class Livre  {
     @Id
     private int id; 
 	private static final long serialVersionUID = 1L;
+	//@Embedded
 	private Auteur auteur;    
     
-	//@ManyToOne 
-	//private String auteur;
 	private String titre;
 	private String resume;
 	private int anneePublication;
 	private int nbTomes;
-	private String theme;
+	private String theme;	
+	private HashMap<Auteur, ArrayList<Integer>> catalogue;
+	//@ElementCollection
+	private HashMap<Auteur, ArrayList<Livre>> catAuteurLivre;
+	
+	/**
+	 * @return the catAuteurLivre
+	 */
+	public synchronized HashMap<Auteur, ArrayList<Livre>> getCatAuteurLivre() {
+		return catAuteurLivre;
+	}
+
+	/**
+	 * @param catAuteurLivre the catAuteurLivre to set
+	 */
+	public synchronized void setCatAuteurLivre(HashMap<Auteur, ArrayList<Livre>> catAuteurLivre) {
+		this.catAuteurLivre = catAuteurLivre;
+	}
+
+	/**
+	 * @return the catalogue
+	 */
+	public HashMap<Auteur, ArrayList<Integer>> getCatalogue() {
+		return catalogue;
+	}
+
+	/**
+	 * @param catalogue the catalogue to set
+	 */
+	public void setCatalogue(HashMap<Auteur, ArrayList<Integer>> catalogue) {
+		this.catalogue = catalogue;
+	}
 
 	public Livre() {
     }
 	 
-	/*
-	public Livre(String auteur, String titre) {
-		this.auteur = auteur;
-		this.titre = titre;
-	}*/
 	
 	public Livre(Auteur auteur, String titre) {
 		this.auteur = auteur;
@@ -63,21 +93,12 @@ public class Livre  {
 		return titre.hashCode() + auteur.hashCode();
 	}
 
-	/*
-	public String getAuteur() {
-		return auteur;
-	}*/
-
 	
 	public Auteur getAuteur() {
 		return auteur;
 	} 	
 
-	/*
-	public void setAuteur(String auteur) {
-		this.auteur = auteur;
-	}*/
-	
+
 	public void setAuteur(Auteur auteur) {
 		this.auteur = auteur;
 	}

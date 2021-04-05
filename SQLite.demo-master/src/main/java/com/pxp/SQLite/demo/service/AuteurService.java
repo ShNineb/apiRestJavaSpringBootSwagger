@@ -3,7 +3,6 @@
  */
 package com.pxp.SQLite.demo.service;
 import com.pxp.SQLite.demo.entity.Auteur;
-//import com.pxp.SQLite.demo.entity.Student;
 import com.pxp.SQLite.demo.repository.AuteurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,6 @@ public class AuteurService {
             if (!auteurRepository.existsByNom(auteur.getNom())){
             	System.out.println("auteur create 2"+auteur.getNom());
             	auteur.setId(null == auteurRepository.findMaxId()? 0 : auteurRepository.findMaxId() + 1);
-            	//livre.setId(null == livreRepository.findByTitre(livre.getTitre())? 0 : livreRepository.findMaxId() + 1);
             	auteurRepository.save(auteur);
                 return "Auteur record created successfully.";
             }else {
@@ -37,19 +35,6 @@ public class AuteurService {
         }
     }
 
-    /*
-    public List<Livre> readLivres(){
-        return livreRepository.findAll();
-    }*/
-    
-  /*  public Livre getLivre(String titre){
-    	return livreRepository.findByTitre(titre);
-         
-         //return livreRepository.findOne(titre);
-    }
-    */
-    
-    /**/
     public List<Auteur> readAuteurs(){
     	List<Auteur> auteurs = new ArrayList<>();
     	auteurRepository.findAll()
@@ -76,7 +61,7 @@ public class AuteurService {
             return "Auteur does not exists in the database.";
         }
     }
-
+    
     @Transactional
     public String deleteAuteur(Auteur auteur){
         if (auteurRepository.existsByNom(auteur.getNom())){

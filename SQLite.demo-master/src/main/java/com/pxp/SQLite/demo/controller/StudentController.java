@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/student")
+//@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
@@ -29,8 +29,8 @@ public class StudentController {
         return "The application is up...";
     }*/
 
-//    @RequestMapping(value="/student/createstudent", method = RequestMethod.POST)
-    @PostMapping(value="/createstudent")//, method = RequestMethod.POST)
+    @RequestMapping(value="/student/createstudent", method = RequestMethod.POST)
+    //@PostMapping(value="/createstudent")//, method = RequestMethod.POST)
     public String createStudent(@RequestBody Student student){
     	System.out.println("Dans controller");
     	System.out.println(student);
