@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -24,19 +26,35 @@ public class Livre  {
 	 */
 	
     @Id
+    @ApiModelProperty(notes = "The database generated Livre ID")
     private int id; 
 	private static final long serialVersionUID = 1L;
 	//@Embedded
+	@ApiModelProperty(notes = " auteur une instance de la classe Auteur")
+/*	@ApiModelProperty(
+			  value = "auteur une instance de la classe Auteur",
+			  name = "auteur",
+			  dataType = "Auteur",
+			  example = "Vatsal")*/
 	private Auteur auteur;    
-    
+	@ApiModelProperty(notes = " titre du Livre")
 	private String titre;
+	@ApiModelProperty(notes = " résumé du Livre")
 	private String resume;
+	@ApiModelProperty(notes = " année de publication")
 	private int anneePublication;
+	@ApiModelProperty(notes = " nombre de tomes")
 	private int nbTomes;
+	@ApiModelProperty(notes = " thèmatique")
 	private String theme;	
 	private HashMap<Auteur, ArrayList<Integer>> catalogue;
 	//@ElementCollection
 	private HashMap<Auteur, ArrayList<Livre>> catAuteurLivre;
+	
+	
+
+	
+	
 	
 	/**
 	 * @return the catAuteurLivre

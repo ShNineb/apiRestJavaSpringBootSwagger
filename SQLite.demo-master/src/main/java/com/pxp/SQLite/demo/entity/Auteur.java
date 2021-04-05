@@ -17,6 +17,7 @@ import javax.persistence.Id;
 
 @Entity
 @Embeddable
+/// <summary>My super duper data</summary>
 public class Auteur implements Serializable {
 
 	/**

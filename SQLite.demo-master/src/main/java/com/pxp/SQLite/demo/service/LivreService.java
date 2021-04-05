@@ -3,6 +3,9 @@ package com.pxp.SQLite.demo.service;
 import com.pxp.SQLite.demo.entity.Auteur;
 import com.pxp.SQLite.demo.entity.Livre;
 import com.pxp.SQLite.demo.repository.LivreRepository;
+
+import io.swagger.annotations.ApiModelProperty;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +22,13 @@ public class LivreService {
    @Autowired
     private AuteurService auteurService;
 
-   
+	/**
+	 * methode permettant d'ajouter un livre au catalogue des livres de la
+	 * bibliotheque (BD) (méthode équilavelent à "ajouterLivre" de Bibliothecarire)
+	 * 
+	 * @param livre : le nouveau livre a jouter dans la bibliotheque
+	 * @return string : état de l'enregistrement
+	 */   
     @Transactional
     public String createLivre(Livre livre){
         try {
@@ -70,7 +79,14 @@ public class LivreService {
          return livres;
     }
     
-
+	/**
+	 * méthode permettant de lister toutes les oeuvres présentes dans le catalogue (BD)
+	 * de la bibliotheque pour un auteur donné (méthode équivalente à "listerOeuvresAuteur")
+	 * de Bibliothecarire.
+	 * 
+	 * @param auteur: l'auteur des oeuvres recherchés
+	 * @return livres : List<Livre> liste des oeuvres de l'auteur 
+	 */
     @Transactional
     public List<Livre> getLivreParAuteur(String nomAuteur){
     	System.out.println("getLivreParAuteur "+nomAuteur );
@@ -178,10 +194,17 @@ public class LivreService {
 	}*/
     
 
+	/**
+	 * methode permettant d'enlever un livre du catalogue de la bibliotheque
+	 * 
+	 * @param ancienLivre: le livre a enlever
+	 * @return : String: un commentaire de l'état de l'action: livre a bien ete enlevé ou pas
+	 *         
+	 */    
     @Transactional
-    public String deleteLivre(Livre livre){
-    	System.out.println("auteur et titre DELTE  "+ livre.getAuteur() + livre.getTitre());
-        if (livreRepository.existsByTitre(livre.getTitre())){
+    public String deleteLivre(Livre ancienLivre){
+    	System.out.println("auteur et titre DELTE  "+ ancienLivre.getAuteur() + ancienLivre.getTitre());
+        if (livreRepository.existsByTitre(ancienLivre.getTitre())){
             try {
             	/* // Dans le cas d'une liste à enlever si non nécessaire plus tard
             	 * 
@@ -189,13 +212,13 @@ public class LivreService {
                 livres.stream().forEach(s -> {
                 	livreRepository.delete(s);
                 });*/
-                Livre livreRep = livreRepository.findByTitre(livre.getTitre());          
+                     
                 
-                System.out.println("auteur et titre   "+ livre.getAuteur() + livre.getTitre());
-       		 	System.out.println(livre.getAuteur().getNom());
-       		 	System.out.println(livre.getTitre());
+                System.out.println("auteur et titre   "+ ancienLivre.getAuteur() + ancienLivre.getTitre());
+       		 	System.out.println(ancienLivre.getAuteur().getNom());
+       		 	System.out.println(ancienLivre.getTitre());
                 
-              	livreRepository.deleteByTitre(livre.getTitre());           	
+              	livreRepository.deleteByTitre(ancienLivre.getTitre());           	
    
                 
                 return "Book deleted successfully.";
