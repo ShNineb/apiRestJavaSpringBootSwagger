@@ -3,11 +3,15 @@
  */
 package com.pxp.SQLite.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.ManyToOne;
+
+import com.sun.istack.NotNull;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -18,7 +22,9 @@ import java.util.HashMap;
  * @author U023426
  *
  */
+
 @Entity
+@Inheritance
 public class Livre  {
 
 	/**
@@ -36,8 +42,12 @@ public class Livre  {
 			  name = "auteur",
 			  dataType = "Auteur",
 			  example = "Vatsal")*/
+//	@NotNull
 	private Auteur auteur;    
 	@ApiModelProperty(notes = " titre du Livre")
+//	@NotNull
+	//TODO: gérer les erreurs pour bien indiquer que titre ne doit pas etre null
+	@Column(nullable=false) 
 	private String titre;
 	@ApiModelProperty(notes = " résumé du Livre")
 	private String resume;

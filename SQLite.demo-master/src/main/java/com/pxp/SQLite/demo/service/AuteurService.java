@@ -18,6 +18,12 @@ public class AuteurService {
     @Autowired
     private AuteurRepository auteurRepository;
 
+	/**
+	 * methode permettant d'ajouter un auteur
+	 * 
+	 * @param auteur : le nouvel auteur à ajouter si il n'existe pas 
+	 * @return string : état de l'enregistrement nouvel auteur à ajouter si il n'existe pas, sinon rien à faire
+	 */       
     @Transactional
     public String createAuteur(Auteur auteur){
         try {
@@ -35,13 +41,25 @@ public class AuteurService {
         }
     }
 
-    public List<Auteur> readAuteurs(){
+	/**
+	 * méthode permettant de lister toutes les auteurs présents dans le catalogue (BD)
+	 * de la bibliotheque 
+	 * 
+	 * @return auteurs : List<Auteur> liste des auteurs
+	 */     
+    public List<Auteur> getAuteurs(){
     	List<Auteur> auteurs = new ArrayList<>();
     	auteurRepository.findAll()
          .forEach(auteurs::add);
          return auteurs;
     }
 
+	/**
+	 * méthode permettant de mettre à jour un auteur à partir de son nom
+	 * 
+	 * @param auteur: auteur de l'auteur recherché
+	 * @return string : commentaire décrivant l'état de la mise à jour: possible ou pas (si l'auteur n'existe pas) 
+	 */
     @Transactional
     public String updateAuteur(Auteur auteur){
         if (auteurRepository.existsByNom(auteur.getNom())){
@@ -61,7 +79,14 @@ public class AuteurService {
             return "Auteur does not exists in the database.";
         }
     }
-    
+ 
+	/**
+	 * methode permettant d'enlever un auteur du catalogue de la bibliotheque
+	 * 
+	 * @param auteur: auteur a enlever
+	 * @return : String: un commentaire de l'état de l'action: auteur a bien été enlevé ou pas
+	 *         
+	 */       
     @Transactional
     public String deleteAuteur(Auteur auteur){
         if (auteurRepository.existsByNom(auteur.getNom())){

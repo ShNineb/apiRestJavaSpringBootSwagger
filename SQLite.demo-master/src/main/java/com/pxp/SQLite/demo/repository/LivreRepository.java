@@ -27,6 +27,7 @@ public interface LivreRepository extends JpaRepository<Livre, Integer> {
 
 
     public boolean existsByTitre(String titre);
+    public boolean existsByTheme(String theme);
     public boolean existsByAuteurNom(String nomAuteur);
          
 

@@ -33,46 +33,38 @@ public class LivreService {
     public String createLivre(Livre livre){
         try {
             if (!livreRepository.existsByTitre(livre.getTitre())){
-            	System.out.println("livre create 2"+livre);
-
+            	
+           // if (livreRepository.findByTitre(livre.getTitre()) != null){
+            	
+            	System.out.println("livre create If"+ livre.getTitre());
+            	
             	livre.setId(null == livreRepository.findMaxId()? 0 : livreRepository.findMaxId() + 1);
             	Auteur auteur = livre.getAuteur();
             	auteurService.createAuteur(auteur);
                 livreRepository.save(livre);
                 return "Book record created successfully.";
             }else {
-                return "Book already exists in the database.";
+            	/*if (livre.getTitre() == "string") {
+            		return "Add a title to the book.";}
+            	else
+            	{*/
+            		System.out.println("livre create Else"+ livre.getTitre());
+            		return "Book already exists in the database.";            	
+            	//}
             }
         }catch (Exception e){
             throw e;
         }
     }
     
-    
-    
-	/**
-	 * methode permettant d'ajouter un livre au catalogue des livres de la
-	 * bibliotheque
-	 * 
-	 * @param nouveauLivre : le nouveau livre a jouter dans la bibliotheque
-	 * @return
-	 */
-    
-    /*
-	public ArrayList<Livre> ajouterLivre(Livre nouveauLivre) {
-		Auteur auteur = nouveauLivre.getAuteur();
-		if (Objects.nonNull(getCatalogue().get(auteur))) {
-			getCatalogue().get(auteur).add(nouveauLivre);
-		} else {
-			ArrayList<Livre> livres = new ArrayList<>();
-			livres.add(nouveauLivre);
-			getCatalogue().put(auteur, livres);
-		}
-		return getCatalogue().get(auteur);
 
-	}*/
-    
-    public List<Livre> readLivres(){
+	/**
+	 * méthode permettant de lister toutes les oeuvres présentes dans le catalogue (BD)
+	 * de la bibliotheque 
+	 * 
+	 * @return livres : List<Livre> liste des oeuvres
+	 */    
+    public List<Livre> getLivres(){
     	List<Livre> livres = new ArrayList<>();
     	livreRepository.findAll()
          .forEach(livres::add);
@@ -88,7 +80,7 @@ public class LivreService {
 	 * @return livres : List<Livre> liste des oeuvres de l'auteur 
 	 */
     @Transactional
-    public List<Livre> getLivreParAuteur(String nomAuteur){
+    public List<Livre> getLivresParAuteur(String nomAuteur){
     	System.out.println("getLivreParAuteur "+nomAuteur );
          
          if (livreRepository.existsByAuteurNom(nomAuteur)) {
@@ -118,7 +110,12 @@ public class LivreService {
     
     
 
-
+	/**
+	 * méthode permettant de mettre à jour un livre à partir de titre
+	 * 
+	 * @param titre: titre de l'oeuvre recherchée
+	 * @return string : commentaire décrivant l'état de la mise à jour: possible ou pas (si le livre n'existe pas) 
+	 */
     @Transactional
     public String updateLivre(String titre, Livre livre){
     	 System.out.println("livre update  ");
@@ -177,21 +174,34 @@ public class LivreService {
 	 * @param theme : le theme cherche
 	 * @return: une liste contenant les livres sur ce theme
 	 */
-    /*
-	public ArrayList<Livre> trouverLivresSurUnTheme(String theme) {
-		ArrayList<Livre> livresSurUnThemes = new ArrayList<Livre>();
-		
-		
-		
-		for (ArrayList<Livre> livresAuteur : catalogue.values()) {
-			for (Livre livre : livresAuteur) {
-				if (theme.equals(livre.getTheme()))
-					livresSurUnThemes.add(livre);
-			}
-		}
+    @Transactional
+    public List<Livre> getLivresParTheme(String theme){
+    	System.out.println("getLivresParTheme "+theme );
+         
+         if (livreRepository.existsByTheme(theme)) {
+             try {
+            	 System.out.println("getLivreParAuteur nomAuteur"+theme );
 
-		return livresSurUnThemes;
-	}*/
+            	 List<Livre> livres = livreRepository.findByTheme(theme) ;
+            	 
+            	 /* // pour test à enlever ensuite
+            	  * 
+            	  * livreRepository.findByAuteurNom(nomAuteur)            	 
+            	 .forEach(livre -> {
+            		 System.out.println("auteur et titre   "+ livre.getAuteur() + livre.getTitre());
+            		 System.out.println(livre.getAuteur().getNom());
+            		 System.out.println(livre.getTitre());
+            	 }); */
+            	 
+                 return livres;
+            	 
+             }catch (Exception e){
+                 throw e;
+             }
+         }else {
+             return null;
+         }
+    }
     
 
 	/**
