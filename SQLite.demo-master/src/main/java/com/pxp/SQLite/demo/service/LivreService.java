@@ -19,7 +19,7 @@ public class LivreService {
 
     @Autowired
     private LivreRepository livreRepository;
-   @Autowired
+    @Autowired
     private AuteurService auteurService;
 
 	/**

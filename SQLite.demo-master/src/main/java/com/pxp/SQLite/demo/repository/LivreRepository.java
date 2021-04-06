@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,6 +25,7 @@ import com.pxp.SQLite.demo.entity.Livre;
  *
  */
 @Repository
+@Transactional
 public interface LivreRepository extends JpaRepository<Livre, Integer> {
 
 

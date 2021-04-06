@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class AuteurController {
 
-	/**/
+	
 	@Autowired 
 	private AuteurService auteurService;
 

@@ -9,7 +9,12 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.NaturalIdCache;
 
 import com.sun.istack.NotNull;
 
@@ -24,7 +29,7 @@ import java.util.HashMap;
  */
 
 @Entity
-@Inheritance
+@Inheritance//(strategy = InheritanceType.JOINED)
 public class Livre  {
 
 	/**
@@ -45,7 +50,7 @@ public class Livre  {
 //	@NotNull
 	private Auteur auteur;    
 	@ApiModelProperty(notes = " titre du Livre")
-//	@NotNull
+	//@NotNull
 	//TODO: gérer les erreurs pour bien indiquer que titre ne doit pas etre null
 	@Column(nullable=false) 
 	private String titre;
