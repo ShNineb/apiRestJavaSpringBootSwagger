@@ -1,14 +1,12 @@
 package com.pxp.SQLite.demo.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Student {
 
-    @Id //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id 
     private int id;    
 	private Integer age;
     private String name;

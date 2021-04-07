@@ -4,8 +4,6 @@ import com.pxp.SQLite.demo.entity.Auteur;
 import com.pxp.SQLite.demo.entity.Livre;
 import com.pxp.SQLite.demo.repository.LivreRepository;
 
-import io.swagger.annotations.ApiModelProperty;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,25 +31,14 @@ public class LivreService {
     public String createLivre(Livre livre){
         try {
             if (!livreRepository.existsByTitre(livre.getTitre())){
-            	
-           // if (livreRepository.findByTitre(livre.getTitre()) != null){
-            	
-            	System.out.println("livre create If"+ livre.getTitre());
-            	
             	livre.setId(null == livreRepository.findMaxId()? 0 : livreRepository.findMaxId() + 1);
             	Auteur auteur = livre.getAuteur();
             	auteurService.createAuteur(auteur);
                 livreRepository.save(livre);
                 return "Book record created successfully.";
             }else {
-            	/*if (livre.getTitre() == "string") {
-            		return "Add a title to the book.";}
-            	else
-            	{*/
-            		System.out.println("livre create Else"+ livre.getTitre());
             		return "Book already exists in the database.";            	
-            	//}
-            }
+             }
         }catch (Exception e){
             throw e;
         }
@@ -85,19 +72,7 @@ public class LivreService {
          
          if (livreRepository.existsByAuteurNom(nomAuteur)) {
              try {
-            	 System.out.println("getLivreParAuteur nomAuteur"+nomAuteur );
-
             	 List<Livre> livres = livreRepository.findByAuteurNom(nomAuteur) ;
-            	 
-            	 /* // pour test à enlever ensuite
-            	  * 
-            	  * livreRepository.findByAuteurNom(nomAuteur)            	 
-            	 .forEach(livre -> {
-            		 System.out.println("auteur et titre   "+ livre.getAuteur() + livre.getTitre());
-            		 System.out.println(livre.getAuteur().getNom());
-            		 System.out.println(livre.getTitre());
-            	 }); */
-            	 
                  return livres;
             	 
              }catch (Exception e){
@@ -122,8 +97,7 @@ public class LivreService {
         if (livreRepository.existsByTitre(titre)) {
             try {
                
-                Livre livreOP = livreRepository.findByTitre(titre);
-                
+                Livre livreOP = livreRepository.findByTitre(titre);               
                              
                 System.out.println("livre update Titre "+titre );
                 
@@ -221,8 +195,7 @@ public class LivreService {
                 List<Livre> livres = livreRepository.findByTitre(livre.getTitre());
                 livres.stream().forEach(s -> {
                 	livreRepository.delete(s);
-                });*/
-                     
+                });*/                     
                 
                 System.out.println("auteur et titre   "+ ancienLivre.getAuteur() + ancienLivre.getTitre());
        		 	System.out.println(ancienLivre.getAuteur().getNom());

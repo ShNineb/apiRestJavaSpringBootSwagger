@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pxp.SQLite.demo.entity.Abonne;
-import com.pxp.SQLite.demo.entity.Auteur;
 import com.pxp.SQLite.demo.entity.Livre;
 import com.pxp.SQLite.demo.entity.LivreEmprunte;
 import com.pxp.SQLite.demo.repository.AbonneRepository;
@@ -30,14 +29,12 @@ public class LivreEmprunteService {
 	
     @Autowired
     private LivreEmprunteRepository livreEmprunteRepository;
-    /**/
-    @Autowired
-    private AuteurService auteurService;
+
     @Autowired
     private AbonneService abonneService;    
     
     @Autowired
-    private AbonneRepository abonneRepository;	/**/
+    private AbonneRepository abonneRepository;	
     
 	/**
 	 * méthode permettant de lister toutes les oeuvres présentes dans le catalogue (BD)
@@ -77,32 +74,38 @@ public class LivreEmprunteService {
 	 * @param livre : le nouveau livre a jouter dans la bibliotheque
 	 * @return string : état de l'enregistrement
 	 */   
-	
+	//TODO: à compléter pour que le retour soit OK => creation d'un classse unique avec les deux élements
+	//pour un @RequestBody sur la classe "unique"
     @Transactional
-    public String createLivreEmprunte(Livre livreAEmprunte, String nomEmprunteur){
+    public String createLivreEmprunte(String nomEmprunteur, Livre livreAEmprunte) { //Abonne emprunteur) { //String nomEmprunteur){
+    //  public String createLivreEmprunte(AbonneLivreEmprunte abonneLivreEmprunte) { 	
+    	//Livre livreAEmprunte = abonneLivreEmprunte.getLivre();
+    	//String nomEmprunteur = abonneLivreEmprunte.getEmprunteur();
+    			
+     	System.out.println("livreEmprunte create Avant Try  "+ livreAEmprunte.getTitre());
         try {
-            if (!livreEmprunteRepository.existsByTitre(livreAEmprunte.getTitre())){
+            if (livreEmprunteRepository.existsByTitre(livreAEmprunte.getTitre())){
+            	
+            	System.out.println("livreEmprunte create Dans Try  "+ livreAEmprunte.getTitre());
+            	
+            	//String nomEmprunteur = emprunteur.getNom();
             	
             	// on verifie que l emprunteur existe, sinon on le crée
             	if (!abonneRepository.existsByNom(nomEmprunteur)){
             		String tmp = abonneService.createAbonne(nomEmprunteur);
             	}
             	
-
-            	
             	System.out.println("livreEmprunte create If"+ livreAEmprunte.getTitre());
             	
-            	//livreAEmprunte.setId(null == livreEmprunteRepository.findMaxIdLivreEmprunte()? 0 : livreEmprunteRepository.findMaxIdLivreEmprunte() + 1);
             	livreAEmprunte.setId(null == livreEmprunteRepository.findMaxId()? 0 : livreEmprunteRepository.findMaxId() + 1);
+            	Abonne emprunteur = abonneRepository.findByNom();
             	
-            	Abonne abonne = abonneRepository.findByNom(); 
-            	
-            	System.out.println("livreEmprunte abonneRepository finByNom "+ abonne.getIdentifiant() + abonne.getNom());
-
+            	LivreEmprunte livreEmprunte = preterUnLivre(livreAEmprunte, emprunteur); 
+            	livreEmprunteRepository.save(livreEmprunte);
+ 
                 return "Book record created successfully.";
-            }else {
-            		System.out.println("createLivreEmprunte Else"+ livreAEmprunte.getTitre());
-            		return "Book already exists in the database.";            	
+            }else {            		
+            		return "createLivreEmprunte already exists in the database.";            	
             }
         }catch (Exception e){
             throw e;

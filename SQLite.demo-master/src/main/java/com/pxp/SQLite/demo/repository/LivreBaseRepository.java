@@ -8,10 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.NoRepositoryBean;
 
 import com.pxp.SQLite.demo.entity.Livre;
-import com.pxp.SQLite.demo.entity.LivreEmprunte;
 
 /**
- * @author U023426
+ * Interface générique pour gérer l'héritage, LivreRepository et LivreEmprunteRepository en héritent
  *
  */
 @NoRepositoryBean

@@ -10,8 +10,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,10 +52,7 @@ public class LivreController {
 		return livreService.getLivresParAuteur(nomAuteur);
 	}
     
-	@ApiOperation(value = "View a list of books by theme", response = Iterable.class)   
-    /*@ApiModelProperty(
-    	    value = "test de ApiModelProperty",
-    	    example = "{theme: theme}")*/
+	@ApiOperation(value = "View a list of books by theme", response = Iterable.class)
 	@RequestMapping(value = "/livre/getLivresParTheme/{theme}", method = RequestMethod.GET) 
 	public List<Livre> getLivresParTheme(@PathVariable("theme") String theme) {
 		return livreService.getLivresParTheme(theme);

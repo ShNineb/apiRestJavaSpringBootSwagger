@@ -4,22 +4,19 @@
 package com.pxp.SQLite.demo.entity;
 
 /**
- * @author U023426
+ *
  *
  */
 import java.io.Serializable;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 
 
 @Entity
 @Embeddable
-/// <summary>Auteur class managing authors</summary>
 public class Auteur implements Serializable {
 
 	/**

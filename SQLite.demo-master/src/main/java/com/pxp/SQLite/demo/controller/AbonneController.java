@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pxp.SQLite.demo.entity.Abonne;
-import com.pxp.SQLite.demo.entity.Auteur;
 import com.pxp.SQLite.demo.service.AbonneService;
 
 
@@ -34,11 +33,12 @@ public class AbonneController {
 	public String createAbonne(@RequestBody String nomAbonne) {
 		return abonneService.createAbonne(nomAbonne);
 	}	
-	
-	//List<Abonne> getAbonne()
+		
 	@ApiOperation(value = "View a list of abonnes", response = Iterable.class)
 	@RequestMapping(value = "/student/getabonnes", method = RequestMethod.GET) 
 	public List<Abonne> getAbonnes() {
 		return abonneService.getAbonnes();
 	}	
+	
+
 }

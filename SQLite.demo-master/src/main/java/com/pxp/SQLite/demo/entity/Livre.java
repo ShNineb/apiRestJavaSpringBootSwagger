@@ -29,29 +29,17 @@ import java.util.HashMap;
  */
 
 @Entity
-@Inheritance//(strategy = InheritanceType.JOINED)
+@Inheritance
 public class Livre  {
 
-	/**
-	 * 
-	 */
-	
+
     @Id
     @ApiModelProperty(notes = "The database generated Livre ID")
     private int id; 
 	private static final long serialVersionUID = 1L;
-	//@Embedded
 	@ApiModelProperty(notes = " auteur une instance de la classe Auteur")
-/*	@ApiModelProperty(
-			  value = "auteur une instance de la classe Auteur",
-			  name = "auteur",
-			  dataType = "Auteur",
-			  example = "Vatsal")*/
-//	@NotNull
 	private Auteur auteur;    
-	@ApiModelProperty(notes = " titre du Livre")
-	//@NotNull
-	//TODO: gérer les erreurs pour bien indiquer que titre ne doit pas etre null
+	@ApiModelProperty(notes = " titre du Livre")	
 	@Column(nullable=false) 
 	private String titre;
 	@ApiModelProperty(notes = " résumé du Livre")
@@ -63,13 +51,9 @@ public class Livre  {
 	@ApiModelProperty(notes = " thèmatique")
 	private String theme;	
 	private HashMap<Auteur, ArrayList<Integer>> catalogue;
-	//@ElementCollection
 	private HashMap<Auteur, ArrayList<Livre>> catAuteurLivre;
 	
-	
 
-	
-	
 	
 	/**
 	 * @return the catAuteurLivre
@@ -102,6 +86,14 @@ public class Livre  {
 	public Livre() {
     }
 	 
+	public Livre(String titre) {
+		this.titre = titre;
+	}	
+	
+	public Livre(Auteur auteur) {
+		this.auteur = auteur;	
+	}	
+	
 	
 	public Livre(Auteur auteur, String titre) {
 		this.auteur = auteur;

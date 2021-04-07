@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import io.swagger.annotations.ApiModelProperty;
 
 @Entity
-//@Embeddable
 public class Abonne implements Serializable {
 
 	/**
@@ -21,7 +20,6 @@ public class Abonne implements Serializable {
 	 */
     @Id
     @ApiModelProperty(notes = "The database generated Livre ID")
-	//private long identifiant;
     private int id; 
 	private static final long serialVersionUID = 1730766440161300177L;
 	private String nom;
@@ -74,18 +72,16 @@ public class Abonne implements Serializable {
 	/**
 	 * @return the id
 	 */
-	/**/
 	public synchronized int getId() {
 		return id;
-	}/**/
+	}
 
 	/**
 	 * @param id the id to set
 	 */
-	/**/
 	public synchronized void setId(int id) {
 		this.id = id;
-	}/**/
+	}
 
 
 }

@@ -7,12 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.pxp.SQLite.demo.entity.Amende;
-import com.pxp.SQLite.demo.entity.Auteur;
 
-/**
- * @author U023426
- *
- */
 @Repository
 public interface AmendeRepository extends JpaRepository<Amende, Integer>{
 

@@ -6,17 +6,9 @@ package com.pxp.SQLite.demo.entity;
 
 
 import java.time.LocalDate;
-
-import javax.persistence.Cacheable;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.PrimaryKeyJoinColumn;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.NaturalIdCache;
-import org.jboss.jandex.TypeTarget.Usage;
 
 
 /**
@@ -31,9 +23,7 @@ public class LivreEmprunte extends Livre {
 	 * 
 	 */
 	@Id
-	private int id;//LivreEmprunte;
-
-	//	private int id;	
+	private int id;	
 	private static final long serialVersionUID = 1L;
 	private Abonne emprunteur;
 	private LocalDate dateDebutEmprunt;
@@ -93,34 +83,16 @@ public class LivreEmprunte extends Livre {
 	/**
 	 * @return the id
 	 */
-	/**/
 	public synchronized int getId() {
 		return id;
-	}/**/
+	}
 
 	/**
 	 * @param id the id to set
 	 */
-	/**/
 	public synchronized void setId(int id) {
 		this.id = id;
-	}	/**/
+	}	
 	
-	/**
-	 * @return the idLivreEmprunte
-	 */
-	/*
-	public int getIdLivreEmprunte() {
-		return idLivreEmprunte;
-	}*/
-
-
-	/**
-	 * @param idLivreEmprunte the idLivreEmprunte to set
-	 */
-	/*
-	public void setIdLivreEmprunte(int idLivreEmprunte) {
-		this.idLivreEmprunte = idLivreEmprunte;
-	}*/
 
 }

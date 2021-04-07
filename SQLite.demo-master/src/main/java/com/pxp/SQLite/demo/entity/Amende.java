@@ -15,9 +15,9 @@ import javax.persistence.Id;
 @Embeddable
 public class Amende {
 	@Id
-	private int id;//Amende;
+	private int id;
 	private double montantAmende;
-	private LivreEmprunte livreEnRetard;
+	//private LivreEmprunte livreEnRetard; //LivreEmprunte inclus Abonne qui inclut Amende qui lui même inclut LivreEmprunte => on enlève
 
 	public Amende() {}
 	
@@ -28,7 +28,7 @@ public class Amende {
 	 
 
 	public Amende(LivreEmprunte livreEmprunte, double montantAmende) {
-		this.livreEnRetard = livreEmprunte;
+	//	this.livreEnRetard = livreEmprunte;
 		this.montantAmende = montantAmende;
 	}
 
@@ -50,10 +50,11 @@ public class Amende {
 
 	}
 
+	/*
 	@Override
 	public int hashCode() {
 		return livreEnRetard.hashCode();
-	}
+	}*/
 
 	public double getMontantAmende() {
 		return montantAmende;
@@ -67,13 +68,13 @@ public class Amende {
 		this.montantAmende = montantAmende;
 	}
 
-
+/*
 	public LivreEmprunte getLivreEnRetard() {
 		return livreEnRetard;
 	}
 
 	public void setLivreEnRetard(LivreEmprunte livreEnRetard) {
 		this.livreEnRetard = livreEnRetard;
-	}
+	}*/
 
 }

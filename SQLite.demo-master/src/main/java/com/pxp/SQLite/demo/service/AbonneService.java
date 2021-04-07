@@ -16,7 +16,7 @@ import com.pxp.SQLite.demo.repository.AbonneRepository;
 
 
 /**
- * @author U023426
+ * 
  *
  */
 @Service
@@ -38,8 +38,9 @@ public class AbonneService {
         	System.out.println("auteur create 1" + nomAbonne);
             if (!abonneRepository.existsByNom(nomAbonne)){
             	System.out.println("auteur create 2"+nomAbonne);
-            	Abonne abonne = new Abonne(); 
-            //	abonne.setIdentifiant(null == abonneRepository.findMaxIdentifiant()? 0 : abonneRepository.findMaxIdentifiant() + 1);
+            	Abonne abonne = new Abonne();            
+            	abonne.setId(null == abonneRepository.findMaxId()? 0 : abonneRepository.findMaxId() + 1);
+            	abonne.setIdentifiant(abonne.getId());
             	abonne.setNom(nomAbonne);
             	abonneRepository.save(abonne);
                 return "nomAbonne record created successfully.";
